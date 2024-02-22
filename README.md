@@ -1,3 +1,9 @@
+# 概要
+Begradホームページ
+https://begrad.jp
+
+STUDIOで構築していたが、頻繁な変更をせず、経費を削減できるので移行
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
