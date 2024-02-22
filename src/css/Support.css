@@ -1,0 +1,26 @@
+.support{
+  padding: 20px; 
+  margin: 20px auto; 
+  max-width: 600px;
+
+  border-radius: 50px;
+  background: #e0e0e0;
+  box-shadow:  20px 20px 60px #bebebe,
+             -20px -20px 60px #ffffff;
+}
+
+.support-link {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #007bff; 
+    color: #ffffff; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    transition: background-color 0.3s; 
+    box-shadow: gray 2px 2px 5px;
+  }
+  
+  .support-link:hover {
+    background-color: #0056b3; 
+  }

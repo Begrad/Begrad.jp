@@ -1,0 +1,37 @@
+.products {
+    padding: 2rem;
+  }
+  
+  .product-list {
+    display: flex;
+    overflow-x: auto; /* 横スクロールを有効化 */
+    gap: 1rem; /* 要素間の間隔 */
+    padding: 1rem; /* 下の余白 */
+  }
+  
+  .product-item {
+    display: flex;
+    align-items: center; /* 画像と情報を中央揃え */
+    background: #f9f9f9; /* 背景色、適宜調整 */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    flex-shrink: 0;
+  }
+  
+  .product-image {
+    width: 100px; /* 画像のサイズ、適宜調整 */
+    height: 100px; /* 画像のサイズ、適宜調整 */
+    object-fit: cover; /* 画像のアスペクト比を保持 */
+    margin-right: 1rem; /* 画像と情報の間隔 */
+  }
+  
+  .product-info h3 {
+    margin: 0; /* タイトルの余白を削除 */
+    font-size: 1.2rem; /* タイトルのサイズ、適宜調整 */
+  }
+  
+  .product-info p {
+    margin: 0.5rem 0 0; /* 説明文の余白、適宜調整 */
+    font-size: 0.9rem; /* 説明文のサイズ、適宜調整 */
+  }
