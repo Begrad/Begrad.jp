@@ -46,9 +46,6 @@ devDependencies:
   '@testing-library/react':
     specifier: ^13.4.0
     version: 13.4.0(react-dom@18.2.0)(react@18.2.0)
-  jest-dom:
-    specifier: link:@types/@testing-library/jest-dom
-    version: link:@types/@testing-library/jest-dom
 
 packages:
 
