@@ -22,5 +22,14 @@
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "node_modules",
+    "build",
+    "scripts",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
   ]
 }
