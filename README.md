@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/963ac300-768f-4647-9bbf-637d078dd62d/deploy-status)](https://app.netlify.com/sites/begrad/deploys)
+
 # 概要
 Begradホームページ
 https://begrad.jp
