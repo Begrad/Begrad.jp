@@ -1,25 +1,41 @@
 import React from "react";
-import "../css/Footer.css"; // スタイルシートのインポート
+import "../css/Footer.css";
 import atSymbol from "../assets/at.png";
 
-const Footer: React.FC = () => {
+type Props = {
+  postcode: string;
+  address: string;
+  tel: string;
+  businessHours: string;
+  email: string;
+};
+
+const Footer: React.FC<Props> = ({
+  postcode,
+  address,
+  tel,
+  businessHours,
+  email,
+}) => {
+  const separatedEmail = email.split("@");
+
   return (
     <footer className="footer">
       <div className="footer-content">
-        <p>〒150-0043</p>
-        <p>東京都渋谷区道玄坂1丁目10番8号渋谷道玄坂東急ビル2F−C</p>
+        <p>{postcode}</p>
+        <p>{address}</p>
         <br />
-        <p>TEL: 070-9194-9310</p>
-        <p>(10:00 ~ 22:00)</p>
+        <p>{tel}</p>
+        <p>{businessHours}</p>
         <br />
         <p>
-          contact
+          {separatedEmail[0]}
           <img
             src={atSymbol}
             alt="at"
             style={{ width: "23px", margin: "-5px", verticalAlign: "middle" }}
           />
-          begrad.jp
+          {separatedEmail[1]}
         </p>
         <button onClick={() => (window.location.href = "path/to/contact/form")}>
           CONTACT US

@@ -40,3 +40,7 @@
     text-decoration: underline; /* ホバー時にアンダーラインを表示 */
   }
   
+  .member-role {
+    font-size: 0.8rem; 
+    color: #666;
+  }
