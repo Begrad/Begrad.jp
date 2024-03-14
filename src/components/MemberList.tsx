@@ -32,7 +32,7 @@ export const MemberList: React.FC = () => {
             <div className="member-info">
               <h3>{member.name}</h3>
               {member.role && <p className="member-role">{member.role}</p>}
-              <p>{member.description}</p>
+              <pre>{member.description}</pre>
               {member.link && (
                 <a href={member.link} target="_blank" rel="noopener noreferrer">
                   詳細
