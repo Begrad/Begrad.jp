@@ -1,3 +1,5 @@
+import "../css/About.css";
+
 const About: React.FC<{ text: string }> = ({ text }) => {
   return (
     <section id="about" className="about">
