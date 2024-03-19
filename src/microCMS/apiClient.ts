@@ -11,33 +11,43 @@ export type Image = {
   height: number;
   width: number;
 };
+export type Links = {
+  link:string;
+}
 
 export type Member = {
-  memberId: number;
+  memberId: string;
   name: string;
   description?: string;
+  descriptionDetail?: string;
   icon?: Image;
-  link?: string;
+  links?: Links[];
+  youtubeList?: YouTubeData[];
   role?: string;
 }
 
 export type Company = {
-nameEn: string;
-nameJa: string;
-about: string;
-mission: string;
-supportTitle: string;
-supportDescription: string;
-postcode: string;
-address: string;
-tel: string;
-businessHours: string;
-email: string;
+  nameEn: string;
+  nameJa: string;
+  about: string;
+  mission: string;
+  supportTitle: string;
+  supportDescription: string;
+  postcode: string;
+  address: string;
+  tel: string;
+  businessHours: string;
+  email: string;
 }
 
 type Content = {
   text: string;
 };
+
+type YouTubeData = {
+  title: string;
+  link: string;
+}
 
 interface Endpoints {
   // API in list format.
@@ -63,3 +73,4 @@ export const getCompany = async (): Promise<Company> => {
   const company = await client.getList({ endpoint: 'company'});
   return company.contents[0];
 }
+

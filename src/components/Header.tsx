@@ -21,7 +21,7 @@ const Header: React.FC = () => {
             <a href="#support">Support</a>
           </li>
           <li>
-            <a href="#member">Member</a>
+            <a href="#members">Members</a>
           </li>
         </ul>
       </nav>
