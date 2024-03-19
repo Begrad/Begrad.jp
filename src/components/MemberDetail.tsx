@@ -63,7 +63,7 @@ export const MemberDetail: React.FC = () => {
       <pre className="member-datail-description">
         {member?.descriptionDetail}
       </pre>
-      {memberId === "2" && (
+      {member?.youtubeList !== null && (
         <div className="member-detail-youtube">
           {youtubeList.map((v, index) => (
             <iframe
