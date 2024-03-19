@@ -5,6 +5,27 @@ import { getMembers, Member } from "../microCMS/apiClient";
 import { useParams } from "react-router-dom";
 import MembersList from "./MembersList";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faInstagram,
+  faYoutube,
+  faTwitch,
+  faGithub,
+  faDiscord,
+  faXTwitter,
+  faFacebook,
+  faLinkedin,
+  faTiktok,
+  faSnapchat,
+  faSpotify,
+  faSoundcloud,
+  faSteam,
+  faLine,
+  faPixiv,
+  faWhatsapp,
+  faPinterest,
+} from "@fortawesome/free-brands-svg-icons";
+import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 
 export const MemberDetail: React.FC = () => {
   const { memberId } = useParams<{ memberId: string }>();
@@ -60,6 +81,7 @@ export const MemberDetail: React.FC = () => {
       {member?.links?.map((v, index) => (
         <>
           <a key={index} href={v.link} className="member-detail-link">
+            {getIcon(getDomain(v.link))}
           </a>
           <br />
         </>
@@ -77,5 +99,48 @@ const getDomain = (url: string) => {
   return url;
 };
 
+const getIcon = (domain: string) => {
+  switch (domain) {
+    case "twitter.com":
+      return <FontAwesomeIcon icon={faXTwitter} />;
+    case "x.com":
+      return <FontAwesomeIcon icon={faXTwitter} />;
+    case "instagram.com":
+      return <FontAwesomeIcon icon={faInstagram} />;
+    case "youtube.com":
+      return <FontAwesomeIcon icon={faYoutube} />;
+    case "twitch.tv":
+      return <FontAwesomeIcon icon={faTwitch} />;
+    case "github.com":
+      return <FontAwesomeIcon icon={faGithub} />;
+    case "discord.com":
+      return <FontAwesomeIcon icon={faDiscord} />;
+    case "facebook.com":
+      return <FontAwesomeIcon icon={faFacebook} />;
+    case "linkedin.com":
+      return <FontAwesomeIcon icon={faLinkedin} />;
+    case "tiktok.com":
+      return <FontAwesomeIcon icon={faTiktok} />;
+    case "snapchat.com":
+      return <FontAwesomeIcon icon={faSnapchat} />;
+    case "spotify.com":
+      return <FontAwesomeIcon icon={faSpotify} />;
+    case "soundcloud.com":
+      return <FontAwesomeIcon icon={faSoundcloud} />;
+    case "steam.com":
+      return <FontAwesomeIcon icon={faSteam} />;
+    case "line.com":
+      return <FontAwesomeIcon icon={faLine} />;
+    case "pixiv.com":
+      return <FontAwesomeIcon icon={faPixiv} />;
+    case "whatsapp.com":
+      return <FontAwesomeIcon icon={faWhatsapp} />;
+    case "pinterest.com":
+      return <FontAwesomeIcon icon={faPinterest} />;
+
+    default:
+      return <FontAwesomeIcon icon={faGlobe} />;
+  }
+};
 
 export default MemberDetail;
