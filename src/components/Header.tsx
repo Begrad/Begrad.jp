@@ -12,16 +12,16 @@ const Header: React.FC = () => {
       <nav>
         <ul>
           <li>
-            <a href="#about">About</a>
+            <a href="/#about">About</a>
           </li>
           <li>
-            <a href="#products">Products</a>
+            <a href="/#products">Products</a>
           </li>
           <li>
-            <a href="#support">Support</a>
+            <a href="/#support">Support</a>
           </li>
           <li>
-            <a href="#members">Members</a>
+            <a href=".#members">Members</a>
           </li>
         </ul>
       </nav>
