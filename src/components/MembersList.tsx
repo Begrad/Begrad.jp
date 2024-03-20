@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../css/Member.css";
 import { getMembers, Member } from "../microCMS/apiClient";
 
-export const MemberList: React.FC = () => {
+export const MembersList: React.FC = () => {
   const [members, setMembers] = React.useState<Member[]>([]);
 
   useEffect(() => {
-    console.log(process.env);
     const fetchMembers = async () => {
       const response = await getMembers();
       if (response != null) {
@@ -19,9 +19,9 @@ export const MemberList: React.FC = () => {
   if (members.length === 0) return <div>Loading...</div>;
 
   return (
-    <section id="member" className="member">
-      <h2>MEMBER</h2>
-      <div className="member-list">
+    <section id="members" className="members">
+      <h2>MEMBERS</h2>
+      <div className="members-list">
         {members.map((member) => (
           <div key={member.memberId} className="member-item">
             <img
@@ -33,11 +33,7 @@ export const MemberList: React.FC = () => {
               <h3>{member.name}</h3>
               {member.role && <p className="member-role">{member.role}</p>}
               <pre>{member.description}</pre>
-              {member.link && (
-                <a href={member.link} target="_blank" rel="noopener noreferrer">
-                  詳細
-                </a>
-              )}
+              <Link to={`/members/${member.memberId}`}>詳細</Link>
             </div>
           </div>
         ))}
@@ -46,4 +42,4 @@ export const MemberList: React.FC = () => {
   );
 };
 
-export default MemberList;
+export default MembersList;

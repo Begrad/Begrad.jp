@@ -1,4 +1,4 @@
-.member-list {
+.members-list {
     display: flex;
     flex-wrap: wrap;
     gap: 20px; /* メンバー間の間隔 */
@@ -34,6 +34,7 @@
   .member-info a {
     color: #007bff; /* リンクの色 */
     text-decoration: none; /* アンダーラインを消す */
+   
   }
   
   .member-info a:hover {
@@ -43,4 +44,26 @@
   .member-role {
     font-size: 0.8rem; 
     color: #666;
+  }
+
+  .member-detail-link{
+    margin-bottom: 3px;
+    display: block;
+  }
+
+  .member-datail-img{
+    max-width: 100%;
+    height: auto;
+
+    margin-bottom: 30px;
+  }
+
+  .member-datail-description{
+    margin-bottom: 50px;
+    display: block;
+  }
+
+  .member-detail-youtube{
+    margin-bottom: 50px;
+    display: block;
   }
