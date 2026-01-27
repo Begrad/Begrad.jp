@@ -1,4 +1,4 @@
-import { createClient,MicroCMSSchemaInfer } from 'microcms-ts-sdk';
+import { createClient } from 'microcms-ts-sdk';
 
 // Initialize Client SDK.
 export const client = createClient<Endpoints>({
@@ -14,6 +14,14 @@ export type Image = {
 export type Links = {
   link:string;
 }
+
+export type Product = {
+  id: string;
+  title: string;
+  description: string;
+  descriptionDetail?: string;
+  productImage?: Image;
+};
 
 export type Member = {
   memberId: string;
@@ -52,6 +60,7 @@ type YouTubeData = {
 interface Endpoints {
   // API in list format.
   list: {
+    products: Product;
     members: Member;
     company: Company;
   };
@@ -61,9 +70,6 @@ interface Endpoints {
   };
 }
 
-type Schema = MicroCMSSchemaInfer<typeof client>;
-
-
 export const getMembers = async (): Promise<Member[]> => {
   const members = await client.getList({ endpoint: 'members'});
   return members.contents;
@@ -72,5 +78,10 @@ export const getMembers = async (): Promise<Member[]> => {
 export const getCompany = async (): Promise<Company> => {
   const company = await client.getList({ endpoint: 'company'});
   return company.contents[0];
+}
+
+export const getProducts = async (): Promise<Product[]> => {
+  const products = await client.getList({ endpoint: 'products' });
+  return products.contents;
 }
 
