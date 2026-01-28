@@ -1,10 +1,18 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/963ac300-768f-4647-9bbf-637d078dd62d/deploy-status)](https://app.netlify.com/sites/begrad/deploys)
-
 # 概要
 Begradホームページ
 https://begrad.jp
 
 STUDIOで構築していたが、頻繁な変更をせず、経費を削減できるので移行
+
+## 技術スタック
+
+- フロントエンド: React + TypeScript（Create React App）
+- ルーティング: React Router v6
+- スタイリング: CSS（コンポーネントごとに分割）
+- CMS: microCMS（`company` / `members` / `products`）
+- HTTPクライアント: axios
+- テスト: Jest + React Testing Library
+- デプロイ: 現在は手動ホスティング
 
 # Getting Started with Create React App
 
