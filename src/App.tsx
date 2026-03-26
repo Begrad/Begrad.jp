@@ -13,6 +13,9 @@ import Support from "./components/Support";
 import MembersList from "./components/MembersList";
 import MemberDetail from "./components/MemberDetail";
 import ScrollToTopButton from "./components/ScrollToTopButton";
+import TomoMemoLp from "./components/TomoMemoLp";
+import TomoMemoTerms from "./components/TomoMemoTerms";
+import TomoMemoPrivacy from "./components/TomoMemoPrivacy";
 
 function App() {
   const [company, setCompany] = useState<Company | null>(null);
@@ -51,6 +54,12 @@ function App() {
           />
           <Route path="members" element={<MembersList />} />
           <Route path="members/:memberId" element={<MemberDetail />} />
+          <Route path="apps/friend-memo" element={<TomoMemoLp />} />
+          <Route path="apps/friend-memo/terms" element={<TomoMemoTerms />} />
+          <Route
+            path="apps/friend-memo/privacy"
+            element={<TomoMemoPrivacy />}
+          />
         </Routes>
         <Footer
           postcode={company.postcode}

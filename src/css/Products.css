@@ -18,6 +18,13 @@
     padding: 1rem;
     flex-shrink: 0;
   }
+
+  .product-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
   
   .product-image {
     width: 100px; /* 画像のサイズ、適宜調整 */

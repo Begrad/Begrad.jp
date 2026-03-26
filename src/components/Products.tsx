@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "../css/Products.css";
 
 import blickbreaker from "../assets/appicon/blickbreaker.webp";
@@ -28,6 +29,12 @@ const localIcons = [
 
 type ProductWithIcon = Product & { imageUrl: string };
 
+const tomoMemoProduct: Product = {
+  id: "tomo-memo",
+  title: "ともメモ",
+  description: "フレンド管理アプリ",
+};
+
 const Products: React.FC = () => {
   const [products, setProducts] = useState<ProductWithIcon[]>([]);
   const [loading, setLoading] = useState(true);
@@ -37,7 +44,13 @@ const Products: React.FC = () => {
     const fetchProducts = async () => {
       try {
         const cmsProducts = await getProducts();
-        const productsWithIcons: ProductWithIcon[] = cmsProducts.map(
+        const mergedProducts = cmsProducts.some(
+          (product) => product.title === tomoMemoProduct.title
+        )
+          ? cmsProducts
+          : [...cmsProducts, tomoMemoProduct];
+
+        const productsWithIcons: ProductWithIcon[] = mergedProducts.map(
           (product, index) => ({
             ...product,
             imageUrl:
@@ -89,16 +102,32 @@ const Products: React.FC = () => {
       <div className="product-list">
         {products.map((product) => (
           <div key={product.id} className="product-item">
-            <img
-              src={product.imageUrl}
-              alt={product.title}
-              className="product-image"
-            />
-            <div className="product-info">
-              <h3>{product.title}</h3>
-              <p>{product.description}</p>
+            {product.title === "ともメモ" ? (
+              <Link to="/apps/friend-memo" className="product-link">
+                <img
+                  src={product.imageUrl}
+                  alt={product.title}
+                  className="product-image"
+                />
+                <div className="product-info">
+                  <h3>{product.title}</h3>
+                  <p>{product.description}</p>
+                </div>
+              </Link>
+            ) : (
+              <>
+                <img
+                  src={product.imageUrl}
+                  alt={product.title}
+                  className="product-image"
+                />
+                <div className="product-info">
+                  <h3>{product.title}</h3>
+                  <p>{product.description}</p>
+                </div>
+              </>
+            )}
             </div>
-          </div>
         ))}
       </div>
     </section>
