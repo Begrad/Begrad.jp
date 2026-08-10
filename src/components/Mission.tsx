@@ -1,11 +1,10 @@
-import React from "react";
-import "../css/Mission.css";
+import styles from '../css/Mission.module.css';
 
 const Mission: React.FC<{ text: string }> = ({ text }) => {
   return (
-    <section className="mission-section">
-      <div className="mission-content">
-        <p className="mission-text kaisei-tokumin-regular">{text}</p>
+    <section className={styles['mission-section']}>
+      <div className={styles['mission-content']}>
+        <p className={`${styles['mission-text']} ${styles['kaisei-tokumin-regular']}`}>{text}</p>
       </div>
     </section>
   );

@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
-import "../css/ScrollToTopButton.css";
+'use client';
+
+import { useEffect, useState } from 'react';
+
+import styles from '../css/ScrollToTopButton.module.css';
 
 const ScrollToTopButton: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const toggleVisibility = () => {
+    const toggleVisibility = (): void => {
       if (window.pageYOffset > 500) {
         setIsVisible(true);
       } else {
@@ -13,8 +16,8 @@ const ScrollToTopButton: React.FC = () => {
       }
     };
 
-    window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeEventListener("scroll", toggleVisibility);
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
   if (!isVisible) {
@@ -22,14 +25,12 @@ const ScrollToTopButton: React.FC = () => {
   }
 
   return (
-    isVisible && (
-      <button
-        className="scroll-to-top"
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      >
-        ▲
-      </button>
-    )
+    <button
+      className={styles['scroll-to-top']}
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+    >
+      ▲
+    </button>
   );
 };
 

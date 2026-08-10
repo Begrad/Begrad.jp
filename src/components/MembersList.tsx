@@ -1,39 +1,24 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import "../css/Member.css";
-import { getMembers, Member } from "../microCMS/apiClient";
+import Link from 'next/link';
 
-export const MembersList: React.FC = () => {
-  const [members, setMembers] = React.useState<Member[]>([]);
+import styles from '../css/Member.module.css';
+import { getMembers } from '../microCMS/apiClient';
 
-  useEffect(() => {
-    const fetchMembers = async () => {
-      const response = await getMembers();
-      if (response != null) {
-        setMembers(response);
-      }
-    };
-    void fetchMembers();
-  }, []);
-
-  if (members.length === 0) return <div>Loading...</div>;
+const MembersList = async (): Promise<React.JSX.Element> => {
+  const members = await getMembers();
 
   return (
-    <section id="members" className="members">
+    <section id="members" className={styles.members}>
       <h2>MEMBERS</h2>
-      <div className="members-list">
+      <div className={styles['members-list']}>
         {members.map((member) => (
-          <div key={member.memberId} className="member-item">
-            <img
-              src={member.icon?.url}
-              alt={member.name}
-              className="member-icon"
-            />
-            <div className="member-info">
+          <div key={member.memberId} className={styles['member-item']}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={member.icon?.url} alt={member.name} className={styles['member-icon']} />
+            <div className={styles['member-info']}>
               <h3>{member.name}</h3>
-              {member.role && <p className="member-role">{member.role}</p>}
+              {member.role && <p className={styles['member-role']}>{member.role}</p>}
               <pre>{member.description}</pre>
-              <Link to={`/members/${member.memberId}`}>詳細</Link>
+              <Link href={`/members/${member.memberId}`}>詳細</Link>
             </div>
           </div>
         ))}
