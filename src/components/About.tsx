@@ -1,8 +1,6 @@
-import "../css/About.css";
-
 const About: React.FC<{ text: string }> = ({ text }) => {
   return (
-    <section id="about" className="about">
+    <section id="about">
       <h2>About</h2>
       <pre>{text}</pre>
     </section>

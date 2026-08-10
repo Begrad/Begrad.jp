@@ -67,7 +67,10 @@
   border-radius: 14px;
   text-decoration: none;
   border: 1px solid transparent;
-  transition: background-color 160ms ease, transform 160ms ease, border-color 160ms ease,
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease,
+    border-color 160ms ease,
     box-shadow 160ms ease;
   font-weight: 700;
   box-shadow: 0 10px 26px rgba(52, 152, 219, 0.15);
@@ -119,7 +122,7 @@
 }
 
 .tomo-feature-card::before {
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   top: 0;

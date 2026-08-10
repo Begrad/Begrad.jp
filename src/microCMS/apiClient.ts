@@ -1,10 +1,14 @@
-import { createClient } from 'microcms-ts-sdk';
+import 'server-only';
 
-// Initialize Client SDK.
-export const client = createClient<Endpoints>({
-  serviceDomain: "begradjp",
-  apiKey: process.env.REACT_APP_MICROCMS_API_KEY || '',
+import { createClient } from 'microcms-ts-sdk';
+import { cache } from 'react';
+
+const client = createClient<Endpoints>({
+  serviceDomain: 'begradjp',
+  apiKey: process.env.MICROCMS_API_KEY || '',
 });
+
+const REVALIDATE_SECONDS = 3600;
 
 export type Image = {
   url: string;
@@ -12,8 +16,8 @@ export type Image = {
   width: number;
 };
 export type Links = {
-  link:string;
-}
+  link: string;
+};
 
 export type Product = {
   id: string;
@@ -32,7 +36,7 @@ export type Member = {
   links?: Links[];
   youtubeList?: YouTubeData[];
   role?: string;
-}
+};
 
 export type Company = {
   nameEn: string;
@@ -46,7 +50,7 @@ export type Company = {
   tel: string;
   businessHours: string;
   email: string;
-}
+};
 
 type Content = {
   text: string;
@@ -55,33 +59,44 @@ type Content = {
 type YouTubeData = {
   title: string;
   link: string;
-}
+};
 
 interface Endpoints {
-  // API in list format.
   list: {
     products: Product;
     members: Member;
     company: Company;
   };
-  // API in object format
   object: {
     content: Content;
   };
 }
 
-export const getMembers = async (): Promise<Member[]> => {
-  const members = await client.getList({ endpoint: 'members'});
-  return members.contents;
-}
-
-export const getCompany = async (): Promise<Company> => {
-  const company = await client.getList({ endpoint: 'company'});
+export const getCompany = cache(async (): Promise<Company> => {
+  const company = await client.getList({
+    endpoint: 'company',
+    customRequestInit: { next: { revalidate: REVALIDATE_SECONDS } },
+  });
   return company.contents[0];
-}
+});
 
-export const getProducts = async (): Promise<Product[]> => {
-  const products = await client.getList({ endpoint: 'products' });
+export const getMembers = cache(async (): Promise<Member[]> => {
+  const members = await client.getList({
+    endpoint: 'members',
+    customRequestInit: { next: { revalidate: REVALIDATE_SECONDS } },
+  });
+  return members.contents;
+});
+
+export const getMemberById = cache(async (memberId: string): Promise<Member | null> => {
+  const members = await getMembers();
+  return members.find((m) => m.memberId === memberId) ?? null;
+});
+
+export const getProducts = cache(async (): Promise<Product[]> => {
+  const products = await client.getList({
+    endpoint: 'products',
+    customRequestInit: { next: { revalidate: REVALIDATE_SECONDS } },
+  });
   return products.contents;
-}
-
+});

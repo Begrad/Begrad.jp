@@ -1,0 +1,7 @@
+.next/
+build/
+node_modules/
+.pnpm-store/
+.tmp-tooling-configs/
+pnpm-lock.yaml
+next-env.d.ts

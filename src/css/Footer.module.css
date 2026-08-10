@@ -1,0 +1,25 @@
+.footer {
+  background-color: #333; /* フッターの背景色 */
+  color: #555; /* フッターのテキスト色 */
+  padding: 20px; /* パディング */
+  text-align: center; /* テキストを中央揃え */
+}
+
+.footer-content p {
+  margin: 10px 0; /* 段落間のマージン */
+}
+
+.footer-content button {
+  margin-top: 20px; /* ボタン上のマージン */
+  padding: 10px 20px; /* ボタンのパディング */
+  background-color: #007bff; /* ボタンの背景色 */
+  color: #fff; /* ボタンのテキスト色 */
+  border: none; /* ボーダーを削除 */
+  border-radius: 5px; /* 角丸 */
+  cursor: pointer; /* カーソルをポインターに */
+  transition: background-color 0.3s; /* 背景色の変化をスムーズに */
+}
+
+.footer-content button:hover {
+  background-color: #0056b3; /* ホバー時の背景色 */
+}
