@@ -55,6 +55,8 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-simple-import-sort": "^14.0.0",
     "globals": "^17.9.0",
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1",
     "prettier": "^3.9.6",
     "server-only": "^0.0.1",
     "typescript-eslint": "^8.66.0"
