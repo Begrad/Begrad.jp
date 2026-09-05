@@ -16,10 +16,10 @@ Create React AppからNext.js（App Router）へ移行した。
 - Lint/Format: ESLint（flat config）+ Prettier、いずれも`@tooling-configs`の共有設定を使用
 - デプロイ: Vercel（`main`ブランチへのマージで自動デプロイ）
 - 監視: Vercel Speed Insights / Analytics
+- メール: `contact@begrad.jp` / `support@begrad.jp` はお名前.com メール転送Plusで転送（送信側は別途Resend/SESを使用、`send.auth.begrad.jp`配下で完結）
 
 ## TODO
 
-- [ ] `support@begrad.jp` がメールを受信できない（apexドメインにMXレコードが無い）。プライバシーポリシー・サポートページで問い合わせ先として案内しているため、受信できる状態にするか、窓口を変更するか方針を決める
 - [ ] `fix/vercel-build-and-spa-routing` ブランチに残っている古いstash（Netlify検討時の未使用WIP）を整理する
 - [ ] `/members/[memberId]` を`generateStaticParams`でSSG化するか検討する（現状はリクエスト時のサーバーレンダリング）
 
