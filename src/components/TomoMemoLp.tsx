@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react';
 
 import tomoMemoLogo from '../assets/tomo-memo-logo.png';
 import styles from '../css/TomoMemoPages.module.css';
+import type { Company } from '../microCMS/apiClient';
 
 const APP_STORE_URL = '#';
 const GOOGLE_PLAY_URL = '#';
@@ -62,16 +63,10 @@ const featureItems: Array<{ title: string; description: string }> = [
   },
 ];
 
-const screenshots = [
-  '/friend-memo/screenshots/friend-memo-home.png',
-  '/friend-memo/screenshots/friend-memo-detail.png',
-  '/friend-memo/screenshots/friend-memo-tags.png',
-];
-
 const faqItems = [
   {
     q: '無料で使えますか？',
-    a: '基本機能は無料で利用できます。より多くの項目や高度な利用にはプレミアム機能を提供予定です。',
+    a: '基本機能は無料でご利用いただけます。より多くの項目や高度な利用には、プレミアム機能（アプリ内課金）もご用意しています。',
   },
   {
     q: 'データはどのように保存されますか？',
@@ -79,7 +74,7 @@ const faqItems = [
   },
   {
     q: 'アカウントを削除した場合、データはどうなりますか？',
-    a: '削除時の取り扱いは利用規約・プライバシーポリシーで明示します。公開前に最終仕様を反映します。',
+    a: '削除時の取り扱いについては、利用規約・プライバシーポリシーに記載しています。',
   },
   {
     q: 'オフラインでも使えますか？',
@@ -87,7 +82,9 @@ const faqItems = [
   },
 ];
 
-const TomoMemoLp: React.FC = () => {
+type Props = Pick<Company, 'email' | 'tel' | 'address' | 'postcode' | 'businessHours'>;
+
+const TomoMemoLp: React.FC<Props> = ({ email, tel, address, postcode, businessHours }) => {
   return (
     <main
       className={styles['tomo-page']}
@@ -110,19 +107,33 @@ const TomoMemoLp: React.FC = () => {
         <div className={styles['tomo-links']}>
           <a
             href={APP_STORE_URL}
-            aria-label="App Store（準備中）"
+            aria-label="App Store"
             className={`${styles['tomo-cta']} ${styles['tomo-cta-primary']}`}
           >
-            App Store（準備中）
+            App Store
           </a>
           <a
             href={GOOGLE_PLAY_URL}
-            aria-label="Google Play（準備中）"
+            aria-label="Google Play"
             className={`${styles['tomo-cta']} ${styles['tomo-cta-primary']}`}
           >
-            Google Play（準備中）
+            Google Play
           </a>
         </div>
+      </section>
+
+      <section>
+        <h2>お問い合わせ・サポート</h2>
+        <p>
+          ともメモに関するご質問・不具合のご報告・その他お問い合わせは、以下の窓口までご連絡ください。
+        </p>
+        <p>
+          メール: <a href={`mailto:${email}`}>{email}</a>
+          <br />
+          電話: <a href={`tel:${tel.replace(/[^\d+]/g, '')}`}>{tel}</a>（{businessHours}）
+          <br />
+          住所: 〒{postcode} {address}
+        </p>
       </section>
 
       <section>
@@ -153,27 +164,6 @@ const TomoMemoLp: React.FC = () => {
       </section>
 
       <section>
-        <h2>スクリーンショット</h2>
-        <p className={styles['tomo-note']}>
-          画像は公開前に差し替え予定です。配置先:
-          <code>/public/friend-memo/screenshots/</code>
-        </p>
-        <div className={styles['tomo-shot-grid']}>
-          {screenshots.map((src, idx) => (
-            <figure className={styles['tomo-shot-card']} key={src}>
-              <div
-                className={styles['tomo-shot-image']}
-                style={{ backgroundImage: `url(${src})` }}
-                role="img"
-                aria-label={`ともメモのスクリーンショット${idx + 1}（準備中）`}
-              />
-              <figcaption>画像 {idx + 1}（準備中）</figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
-
-      <section>
         <h2>プライバシーとデータの取り扱い</h2>
         <p>
           ともメモでは、同期機能にクラウドサービスを利用して複数端末間でデータ共有を実現します。
@@ -198,16 +188,15 @@ const TomoMemoLp: React.FC = () => {
       </section>
 
       <section className={styles['tomo-footer-cta']}>
-        <h2>リリース情報をチェック</h2>
-        <p>ストア公開後にリンクを更新します。先に規約・ポリシーをご確認いただけます。</p>
+        <h2>もっと詳しく</h2>
         <div className={styles['tomo-links']}>
-          <a href={APP_STORE_URL} aria-label="App Store（準備中）">
-            App Store（準備中）
+          <a href={APP_STORE_URL} aria-label="App Store">
+            App Store
           </a>
-          <a href={GOOGLE_PLAY_URL} aria-label="Google Play（準備中）">
-            Google Play（準備中）
+          <a href={GOOGLE_PLAY_URL} aria-label="Google Play">
+            Google Play
           </a>
-          <Link href="/#support">お問い合わせ</Link>
+          <Link href="/#support">Begradへのお問い合わせ</Link>
           <Link href="/">Begradサイトトップ</Link>
         </div>
       </section>
