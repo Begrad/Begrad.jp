@@ -23,6 +23,12 @@ const PRODUCT_LINK_BY_TITLE: Record<string, string> = {
 
 const isExternalUrl = (href: string): boolean => /^https?:\/\//.test(href);
 
+const PRODUCT_IMAGE_BY_TITLE: Record<string, string> = {
+  ともメモ: '/products/FriMemo_logo.png',
+  TodoN: '/products/TodoN_logo.png',
+  Flyor: '/products/Flyor_logo.png',
+};
+
 const localIcons = [
   blickbreaker,
   sharehouse,
@@ -48,7 +54,10 @@ const Products = async (): Promise<React.JSX.Element> => {
 
     products = mergedProducts.map((product, index) => ({
       ...product,
-      imageUrl: product.productImage?.url ?? localIcons[index % localIcons.length],
+      imageUrl:
+        PRODUCT_IMAGE_BY_TITLE[product.title] ??
+        product.productImage?.url ??
+        localIcons[index % localIcons.length],
     }));
   } catch {
     error = 'プロダクト情報の取得に失敗しました。';
