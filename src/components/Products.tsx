@@ -15,10 +15,13 @@ import { getProducts, Product } from '../microCMS/apiClient';
 import { withTodoNProduct } from './withTodoNProduct';
 import { withTomoMemoProduct } from './withTomoMemoProduct';
 
-const APP_PAGE_PATH_BY_TITLE: Record<string, string> = {
+const PRODUCT_LINK_BY_TITLE: Record<string, string> = {
   ともメモ: '/apps/friend-memo',
   TodoN: '/apps/todon',
+  Flyor: 'https://flyor.net',
 };
+
+const isExternalUrl = (href: string): boolean => /^https?:\/\//.test(href);
 
 const localIcons = [
   blickbreaker,
@@ -74,7 +77,7 @@ const Products = async (): Promise<React.JSX.Element> => {
       <h2>Products</h2>
       <div className={styles['product-list']}>
         {products.map((product) => {
-          const appPagePath = APP_PAGE_PATH_BY_TITLE[product.title];
+          const linkHref = PRODUCT_LINK_BY_TITLE[product.title];
           const card = (
             <>
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -88,8 +91,17 @@ const Products = async (): Promise<React.JSX.Element> => {
 
           return (
             <div key={product.id} className={styles['product-item']}>
-              {appPagePath ? (
-                <Link href={appPagePath} className={styles['product-link']}>
+              {linkHref && isExternalUrl(linkHref) ? (
+                <a
+                  href={linkHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles['product-link']}
+                >
+                  {card}
+                </a>
+              ) : linkHref ? (
+                <Link href={linkHref} className={styles['product-link']}>
                   {card}
                 </Link>
               ) : (
