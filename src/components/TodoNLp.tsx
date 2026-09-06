@@ -7,25 +7,12 @@ import type { Company } from '../microCMS/apiClient';
 const WEB_APP_URL = 'https://todon.begrad.jp';
 const APP_STORE_URL = '#';
 const GOOGLE_PLAY_URL = '#';
+const CONTACT_FORM_URL = 'https://doukei.com/Begrad';
 
 const tintColorLight = '#3498db';
-const ACCENT_COLORS = [
-  '#3498db',
-  '#2ecc71',
-  '#e74c3c',
-  '#f39c12',
-  '#9b59b6',
-  '#1abc9c',
-  '#34495e',
-  '#e67e22',
-];
 
 interface TomoTintStyle extends CSSProperties {
   '--tomo-tint'?: string;
-}
-
-interface TomoAccentStyle extends CSSProperties {
-  '--tomo-accent'?: string;
 }
 
 const featureItems: Array<{ title: string; description: string }> = [
@@ -82,9 +69,11 @@ const faqItems = [
   },
 ];
 
-type Props = Pick<Company, 'email' | 'tel' | 'address' | 'postcode' | 'businessHours'>;
+type Props = Pick<Company, 'address' | 'postcode' | 'businessHours'>;
 
-const TodoNLp: React.FC<Props> = ({ email, tel, address, postcode, businessHours }) => {
+const normalizePostcode = (postcode: string): string => `〒${postcode.replace(/^[〒\s]+/, '')}`;
+
+const TodoNLp: React.FC<Props> = ({ address, postcode, businessHours }) => {
   return (
     <main
       className={styles['tomo-page']}
@@ -117,14 +106,14 @@ const TodoNLp: React.FC<Props> = ({ email, tel, address, postcode, businessHours
       <section>
         <h2>お問い合わせ・サポート</h2>
         <p>
-          TodoN に関するご質問・不具合のご報告・その他お問い合わせは、以下の窓口までご連絡ください。
+          TodoN に関するご質問・不具合のご報告・その他お問い合わせは、
+          <a href={CONTACT_FORM_URL} target="_blank" rel="noopener noreferrer">
+            お問い合わせフォーム
+          </a>
+          よりご連絡ください（受付時間: {businessHours}）。
         </p>
         <p>
-          メール: <a href={`mailto:${email}`}>{email}</a>
-          <br />
-          電話: <a href={`tel:${tel.replace(/[^\d+]/g, '')}`}>{tel}</a>（{businessHours}）
-          <br />
-          住所: 〒{postcode} {address}
+          住所: {normalizePostcode(postcode)} {address}
         </p>
       </section>
 
@@ -140,12 +129,8 @@ const TodoNLp: React.FC<Props> = ({ email, tel, address, postcode, businessHours
       <section>
         <h2>主な機能</h2>
         <div className={styles['tomo-feature-grid']}>
-          {featureItems.map((item, idx) => (
-            <div
-              key={item.title}
-              className={styles['tomo-feature-card']}
-              style={{ '--tomo-accent': ACCENT_COLORS[idx] } as TomoAccentStyle}
-            >
+          {featureItems.map((item) => (
+            <div key={item.title} className={styles['tomo-feature-card']}>
               <div className={styles['tomo-feature-card-header']}>
                 <span className={styles['tomo-feature-dot']} aria-hidden="true" />
                 <h3>{item.title}</h3>

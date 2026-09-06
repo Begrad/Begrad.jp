@@ -14,8 +14,6 @@ const TodoNPage = async (): Promise<React.JSX.Element> => {
 
   return (
     <TodoNLp
-      email={company.email}
-      tel={company.tel}
       address={company.address}
       postcode={company.postcode}
       businessHours={company.businessHours}
