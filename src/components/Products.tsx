@@ -12,7 +12,13 @@ import strategy from '../assets/appicon/strategy.webp';
 import survival from '../assets/appicon/survival.webp';
 import styles from '../css/Products.module.css';
 import { getProducts, Product } from '../microCMS/apiClient';
+import { withTodoNProduct } from './withTodoNProduct';
 import { withTomoMemoProduct } from './withTomoMemoProduct';
+
+const APP_PAGE_PATH_BY_TITLE: Record<string, string> = {
+  ともメモ: '/apps/friend-memo',
+  TodoN: '/apps/todon',
+};
 
 const localIcons = [
   blickbreaker,
@@ -35,7 +41,7 @@ const Products = async (): Promise<React.JSX.Element> => {
 
   try {
     const cmsProducts = await getProducts();
-    const mergedProducts = withTomoMemoProduct(cmsProducts);
+    const mergedProducts = withTodoNProduct(withTomoMemoProduct(cmsProducts));
 
     products = mergedProducts.map((product, index) => ({
       ...product,
@@ -67,37 +73,31 @@ const Products = async (): Promise<React.JSX.Element> => {
     <section id="products" className={styles.products}>
       <h2>Products</h2>
       <div className={styles['product-list']}>
-        {products.map((product) => (
-          <div key={product.id} className={styles['product-item']}>
-            {product.title === 'ともメモ' ? (
-              <Link href="/apps/friend-memo" className={styles['product-link']}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={product.imageUrl}
-                  alt={product.title}
-                  className={styles['product-image']}
-                />
-                <div className={styles['product-info']}>
-                  <h3>{product.title}</h3>
-                  <p>{product.description}</p>
-                </div>
-              </Link>
-            ) : (
-              <>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={product.imageUrl}
-                  alt={product.title}
-                  className={styles['product-image']}
-                />
-                <div className={styles['product-info']}>
-                  <h3>{product.title}</h3>
-                  <p>{product.description}</p>
-                </div>
-              </>
-            )}
-          </div>
-        ))}
+        {products.map((product) => {
+          const appPagePath = APP_PAGE_PATH_BY_TITLE[product.title];
+          const card = (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={product.imageUrl} alt={product.title} className={styles['product-image']} />
+              <div className={styles['product-info']}>
+                <h3>{product.title}</h3>
+                <p>{product.description}</p>
+              </div>
+            </>
+          );
+
+          return (
+            <div key={product.id} className={styles['product-item']}>
+              {appPagePath ? (
+                <Link href={appPagePath} className={styles['product-link']}>
+                  {card}
+                </Link>
+              ) : (
+                card
+              )}
+            </div>
+          );
+        })}
       </div>
     </section>
   );
