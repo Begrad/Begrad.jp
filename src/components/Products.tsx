@@ -1,92 +1,14 @@
 import Link from 'next/link';
 
-import adventure from '../assets/appicon/adventure.webp';
-import blickbreaker from '../assets/appicon/blickbreaker.webp';
-import music from '../assets/appicon/music.webp';
-import puzzle from '../assets/appicon/puzzle.webp';
-import racing from '../assets/appicon/racing.webp';
-import rpg from '../assets/appicon/rpg.webp';
-import sharehouse from '../assets/appicon/sharehouse.webp';
-import sports from '../assets/appicon/sports.webp';
-import strategy from '../assets/appicon/strategy.webp';
-import survival from '../assets/appicon/survival.webp';
 import styles from '../css/Products.module.css';
-import { getProducts, Product } from '../microCMS/apiClient';
-import { withTodoNProduct } from './withTodoNProduct';
-import { withTomoMemoProduct } from './withTomoMemoProduct';
+import { products } from '../data/products';
 
-const PRODUCT_LINK_BY_TITLE: Record<string, string> = {
-  ともメモ: '/apps/friend-memo',
-  TodoN: '/apps/todon',
-  Flyor: 'https://flyor.net',
-};
-
-const isExternalUrl = (href: string): boolean => /^https?:\/\//.test(href);
-
-const PRODUCT_IMAGE_BY_TITLE: Record<string, string> = {
-  ともメモ: '/products/FriMemo_logo.png',
-  TodoN: '/products/TodoN_logo.png',
-  Flyor: '/products/Flyor_logo.png',
-};
-
-const localIcons = [
-  blickbreaker,
-  sharehouse,
-  puzzle,
-  adventure,
-  racing,
-  strategy,
-  rpg,
-  survival,
-  sports,
-  music,
-].map((icon) => icon.src);
-
-type ProductWithIcon = Product & { imageUrl: string };
-
-const Products = async (): Promise<React.JSX.Element> => {
-  let products: ProductWithIcon[] = [];
-  let error: string | null = null;
-
-  try {
-    const cmsProducts = await getProducts();
-    const mergedProducts = withTodoNProduct(withTomoMemoProduct(cmsProducts));
-
-    products = mergedProducts.map((product, index) => ({
-      ...product,
-      imageUrl:
-        PRODUCT_IMAGE_BY_TITLE[product.title] ??
-        product.productImage?.url ??
-        localIcons[index % localIcons.length],
-    }));
-  } catch {
-    error = 'プロダクト情報の取得に失敗しました。';
-  }
-
-  if (error) {
-    return (
-      <section id="products" className={styles.products}>
-        <h2>Products</h2>
-        <p>{error}</p>
-      </section>
-    );
-  }
-
-  if (products.length === 0) {
-    return (
-      <section id="products" className={styles.products}>
-        <h2>Products</h2>
-        <p>現在公開中のプロダクトはありません。</p>
-      </section>
-    );
-  }
-
+const Products: React.FC = () => {
   return (
     <section id="products" className={styles.products}>
       <h2>Products</h2>
       <div className={styles['product-list']}>
         {products.map((product) => {
-          const linkHref = PRODUCT_LINK_BY_TITLE[product.title];
           const card = (
             <>
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -100,17 +22,17 @@ const Products = async (): Promise<React.JSX.Element> => {
 
           return (
             <div key={product.id} className={styles['product-item']}>
-              {linkHref && isExternalUrl(linkHref) ? (
+              {product.href && product.external ? (
                 <a
-                  href={linkHref}
+                  href={product.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles['product-link']}
                 >
                   {card}
                 </a>
-              ) : linkHref ? (
-                <Link href={linkHref} className={styles['product-link']}>
+              ) : product.href ? (
+                <Link href={product.href} className={styles['product-link']}>
                   {card}
                 </Link>
               ) : (

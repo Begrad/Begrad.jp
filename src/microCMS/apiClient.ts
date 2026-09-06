@@ -19,14 +19,6 @@ export type Links = {
   link: string;
 };
 
-export type Product = {
-  id: string;
-  title: string;
-  description: string;
-  descriptionDetail?: string;
-  productImage?: Image;
-};
-
 export type Member = {
   memberId: string;
   name: string;
@@ -63,7 +55,6 @@ type YouTubeData = {
 
 interface Endpoints {
   list: {
-    products: Product;
     members: Member;
     company: Company;
   };
@@ -91,12 +82,4 @@ export const getMembers = cache(async (): Promise<Member[]> => {
 export const getMemberById = cache(async (memberId: string): Promise<Member | null> => {
   const members = await getMembers();
   return members.find((m) => m.memberId === memberId) ?? null;
-});
-
-export const getProducts = cache(async (): Promise<Product[]> => {
-  const products = await client.getList({
-    endpoint: 'products',
-    customRequestInit: { next: { revalidate: REVALIDATE_SECONDS } },
-  });
-  return products.contents;
 });
